@@ -9,11 +9,7 @@ import {
   Nav,
 } from './styles';
 
-export default function index() {
-  const handleTeste = () => {
-    console.log('kkkk');
-  };
-
+export default function index(): JSX.Element {
   return (
     <Nav>
       <Container>
@@ -25,7 +21,7 @@ export default function index() {
           <MenuItems>
             {/** items do menu */}
             <Item>
-              <a href="#">Teste</a>
+              <a href="#a">Teste</a>
             </Item>
           </MenuItems>
         </Menu>
