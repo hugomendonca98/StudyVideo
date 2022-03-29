@@ -20,19 +20,3 @@ export const Container = styled.div`
 export const MenuLogo = styled.img`
   width: 200px;
 `;
-
-export const MenuItems = styled.ul`
-  display: flex;
-  align-items: center;
-`;
-
-export const Item = styled.li`
-  list-style: none;
-  font-family: Roboto;
-  margin-right: 10px;
-`;
-
-export const ItemLink = styled.a`
-  text-decoration: none;
-  color: #2d2d2d;
-`;
