@@ -6,17 +6,33 @@ export const Nav = styled.nav`
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 `;
 
-export const Menu = styled.div``;
+export const Menu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 export const Container = styled.div`
   width: 1140px;
   margin: auto;
 `;
 
-export const MenuMobile = styled.div``;
+export const MenuLogo = styled.img`
+  width: 200px;
+`;
 
-export const MenuLogo = styled.image``;
+export const MenuItems = styled.ul`
+  display: flex;
+  align-items: center;
+`;
 
-export const MenuItems = styled.ul``;
+export const Item = styled.li`
+  list-style: none;
+  font-family: Roboto;
+  margin-right: 10px;
+`;
 
-export const Item = styled.li``;
+export const ItemLink = styled.a`
+  text-decoration: none;
+  color: #2d2d2d;
+`;

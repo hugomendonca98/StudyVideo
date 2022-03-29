@@ -1,11 +1,12 @@
 import React from 'react';
+import logo from '@/assets/logo.png';
 import {
   Container,
   Item,
+  ItemLink,
   Menu,
   MenuItems,
   MenuLogo,
-  MenuMobile,
   Nav,
 } from './styles';
 
@@ -14,14 +15,19 @@ export default function index(): JSX.Element {
     <Nav>
       <Container>
         <Menu>
-          <MenuMobile>
-            {/** logo e icone */}
-            <MenuLogo />
-          </MenuMobile>
+          <MenuLogo src={logo} />
           <MenuItems>
-            {/** items do menu */}
             <Item>
-              <a href="#a">Teste</a>
+              <ItemLink href="#a">Home</ItemLink>
+            </Item>
+            <Item>
+              <ItemLink href="#a">Cursos</ItemLink>
+            </Item>
+            <Item>
+              <ItemLink href="#a">Criar conta</ItemLink>
+            </Item>
+            <Item>
+              <ItemLink href="#a">Entrar</ItemLink>
             </Item>
           </MenuItems>
         </Menu>

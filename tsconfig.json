@@ -6,12 +6,6 @@
       "dom.iterable",
       "esnext"
     ],
-    "baseUrl": "./src",
-    "paths": {
-      "@Components/*": [
-        "./components/*"
-      ]
-    },
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -28,5 +22,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "extends": "./tsconfig.paths.json"
 }
