@@ -1,5 +1,6 @@
 import LinkButton from '@/components/LinkButton';
 import NavBar from '@/components/NavBar';
+import Footer from '@/components/Footer';
 import {
   Header,
   HeaderText,
@@ -95,6 +96,7 @@ export default function Home(): JSX.Element {
           </Categories>
         </CategoriesSection>
       </Container>
+      <Footer />
     </>
   );
 }
