@@ -18,7 +18,7 @@ export default function index({
 }: LinkButtonProps): JSX.Element {
   return (
     <LinkBtn
-      href={linkTo}
+      to={linkTo}
       background={background}
       textColor={textColor}
       border={border}

@@ -1,4 +1,5 @@
 import { darken } from 'polished';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface LinkButtonProps {
@@ -7,7 +8,7 @@ interface LinkButtonProps {
   border?: string;
 }
 
-export const LinkBtn = styled.a<LinkButtonProps>`
+export const LinkBtn = styled(Link)<LinkButtonProps>`
   text-decoration: none;
   background-color: ${props => props.background};
   color: ${props => props.textColor};

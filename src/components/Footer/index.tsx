@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, FooterContainer, FooterText } from './styles';
 
 export default function index(): JSX.Element {
