@@ -17,7 +17,6 @@ export const FormContainer = styled.form`
   margin-top: 100px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  //border: 1px solid #d4d4d4;
 `;
 
 export const FormTitle = styled.h1`
@@ -31,4 +30,10 @@ export const FormInput = styled.input`
   width: 300px;
   border: 1px solid #d4d4d4;
   outline: none;
+`;
+
+export const FormError = styled.span`
+  color: #c23232;
+  margin: 5px;
+  font-weight: bold;
 `;

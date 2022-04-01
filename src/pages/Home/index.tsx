@@ -1,4 +1,4 @@
-import LinkButton from '@/components/LinkButton';
+import LinkButton from '@/components/CustomLink';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import {

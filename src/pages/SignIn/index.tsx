@@ -1,10 +1,18 @@
-import LinkButton from '@/components/LinkButton';
+import LinkButton from '@/components/CustomLink';
 import NavBar from '@/components/NavBar';
 import { useAuth } from '@/hooks/auth';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { Container, FormContainer, FormInput, FormTitle } from './styles';
+import { toast } from 'react-toastify';
+import CustomButtom from '@/components/CustomButton';
+import {
+  Container,
+  FormContainer,
+  FormError,
+  FormInput,
+  FormTitle,
+} from './styles';
 
 export default function SignIn(): JSX.Element {
   const {
@@ -25,8 +33,31 @@ export default function SignIn(): JSX.Element {
         });
 
         history.push('/dashboard');
+
+        toast.success('Bem Vindo(a)', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
       } catch (error) {
-        console.log(error);
+        toast.error(
+          'Erro ao fazer login, verique as informações e tente novamente.',
+          {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          },
+        );
       }
     },
     [history, signIn],
@@ -45,7 +76,7 @@ export default function SignIn(): JSX.Element {
           <FormInput
             placeholder="E-mail"
             {...register('email', {
-              required: 'O e-mail é obrigatório.',
+              required: 'Endereço de email obrigatório.',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: 'Endereço de email invalido',
@@ -54,12 +85,16 @@ export default function SignIn(): JSX.Element {
           />
           <FormInput
             placeholder="Senha"
-            {...register('password', { required: 'A senha é obrigatória.' })}
+            type="password"
+            {...register('password', { required: 'Senha obrigatória.' })}
           />
-          {errors.email?.message && <span>{errors.email.message}</span>}
-          {errors.password?.message && <span>{errors.password.message}</span>}
-
-          <input type="submit" />
+          {errors.email?.message && (
+            <FormError>{errors.email.message}</FormError>
+          )}
+          {errors.password?.message && (
+            <FormError>{errors.password.message}</FormError>
+          )}
+          <CustomButtom type="submit">Entrar</CustomButtom>
         </FormContainer>
       </Container>
     </>
