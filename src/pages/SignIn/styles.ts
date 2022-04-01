@@ -5,7 +5,7 @@ export const Container = styled.div`
   margin: auto;
 `;
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   padding: 20px;
 
   display: flex;
