@@ -32,7 +32,7 @@ export default function SignIn(): JSX.Element {
           password: data.password,
         });
 
-        history.push('/dashboard');
+        history.push('/painel');
 
         toast.success('Bem Vindo(a)', {
           position: 'top-right',

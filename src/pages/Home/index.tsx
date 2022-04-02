@@ -22,7 +22,7 @@ export default function Home(): JSX.Element {
         <MenuItems>
           <Item>
             <LinkButton
-              linkTo="/signin"
+              linkTo="/entrar"
               background="#fff"
               textcolor="#6e2fbd"
               border="1px solid #E0E0E0"
@@ -31,7 +31,7 @@ export default function Home(): JSX.Element {
             </LinkButton>
           </Item>
           <Item>
-            <LinkButton linkTo="/signup">Criar Conta</LinkButton>
+            <LinkButton linkTo="/criar-conta">Criar Conta</LinkButton>
           </Item>
         </MenuItems>
       </NavBar>

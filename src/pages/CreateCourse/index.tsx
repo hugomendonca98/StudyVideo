@@ -9,15 +9,15 @@ import { useForm } from 'react-hook-form';
 import api from '@/services/api';
 import { toast } from 'react-toastify';
 import {
-  CategoryForm,
-  CategoryFormContainer,
-  CategoryFormTitle,
-  CategoryInput,
+  CourseForm,
+  CourseFormContainer,
+  CourseFormTitle,
+  CourseInput,
   Container,
   FormError,
 } from './styles';
 
-export default function CreateCategory(): JSX.Element {
+export default function CreateCourse(): JSX.Element {
   const { signOut } = useAuth();
   const {
     register,
@@ -33,7 +33,7 @@ export default function CreateCategory(): JSX.Element {
   const handleSendData = useCallback(
     async data => {
       try {
-        await api.post('/category', data);
+        await api.post('/course', data);
         toast.success('Categoria Criada com Sucesso!', {
           position: 'top-right',
           autoClose: 5000,
@@ -78,6 +78,7 @@ export default function CreateCategory(): JSX.Element {
             textcolor="#2d2d2d"
             linkTo="/criar-curso"
             padding="5px 10px"
+            active
           >
             Criar curso
           </CustomLink>
@@ -94,7 +95,6 @@ export default function CreateCategory(): JSX.Element {
             textcolor="#2d2d2d"
             linkTo="/criar-categoria"
             padding="5px 10px"
-            active
           >
             Criar categoria
           </CustomLink>
@@ -108,21 +108,39 @@ export default function CreateCategory(): JSX.Element {
         </div>
       </NavBar>
       <Container>
-        <CategoryFormContainer>
-          <CategoryFormTitle>Criar categoria</CategoryFormTitle>
-          <CategoryForm onSubmit={handleSubmit(handleSendData)}>
-            <CategoryInput
+        <CourseFormContainer>
+          <CourseFormTitle>Criar curso</CourseFormTitle>
+          <CourseForm onSubmit={handleSubmit(handleSendData)}>
+            <CourseInput
+              placeholder="Nome do curso"
+              {...register('name', {
+                required: 'Nome do curso obrigatório.',
+              })}
+            />
+            <CourseInput
+              placeholder="Url da imagem"
+              {...register('image_url', {
+                required: 'Url da imagem do curso obrigatória.',
+              })}
+            />
+            <CourseInput
               placeholder="Titulo da categoria"
-              {...register('title', {
-                required: 'Titulo da categoria obrigatório.',
+              {...register('category_title', {
+                required: 'Titulo da categoria obrigatória.',
               })}
             />
             <CustomButton type="submit">Criar</CustomButton>
-            {errors.title?.message && (
-              <FormError>{errors.title.message}</FormError>
+            {errors.name?.message && (
+              <FormError>{errors.name.message}</FormError>
             )}
-          </CategoryForm>
-        </CategoryFormContainer>
+            {errors.image_url?.message && (
+              <FormError>{errors.image_url.message}</FormError>
+            )}
+            {errors.category_title?.message && (
+              <FormError>{errors.category_title.message}</FormError>
+            )}
+          </CourseForm>
+        </CourseFormContainer>
       </Container>
     </>
   );
