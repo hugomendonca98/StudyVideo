@@ -10,4 +10,5 @@ export const Cards = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 20px;
 `;

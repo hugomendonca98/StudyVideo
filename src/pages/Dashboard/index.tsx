@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import NavBar from '@/components/NavBar';
 import CustomButton from '@/components/CustomButton';
@@ -6,10 +6,39 @@ import CourseCard from '@/components/CourseCard';
 import { useAuth } from '@/hooks/auth';
 import DashboardSection from '@/components/DashboardSection';
 import CustomLink from '@/components/CustomLink';
+import api from '@/services/api';
 import { Cards, Container } from './styles';
 
+interface User {
+  id: string;
+  name: string;
+}
+
+interface Categories {
+  id: string;
+  title: string;
+}
+
+interface Courses {
+  id: string;
+  name: string;
+  image_url: string;
+  categories: Categories;
+  user: User;
+}
+
 export default function Dashboard(): JSX.Element {
+  const [courses, setCourse] = useState<Courses[]>([]);
+
   const { signOut } = useAuth();
+
+  useEffect(() => {
+    async function getCourses(): Promise<void> {
+      const response = await api.get('/course');
+      setCourse(response.data);
+    }
+    getCourses();
+  }, []);
 
   const handleSignOut = useCallback(async () => {
     signOut();
@@ -62,40 +91,23 @@ export default function Dashboard(): JSX.Element {
         </div>
       </NavBar>
       <Container>
-        <DashboardSection
-          title="Nenhum curso cadastrado."
-          btnText="Criar Curso"
-          link="/"
-        />
+        {courses.length < 1 && (
+          <DashboardSection
+            title="Nenhum curso cadastrado."
+            btnText="Criar Curso"
+            link="/"
+          />
+        )}
         <Cards>
-          <CourseCard
-            title="Typescript"
-            imageUrl="https://sempreupdate.com.br/wp-content/uploads/2020/09/typescriptfeature.jpg"
-            categoryTitle="Programação"
-            userName="Hugo Mendonça"
-            courseRoute="#"
-          />
-          <CourseCard
-            title="Typescript"
-            imageUrl="https://sempreupdate.com.br/wp-content/uploads/2020/09/typescriptfeature.jpg"
-            categoryTitle="Programação"
-            userName="Hugo Mendonça"
-            courseRoute="#"
-          />
-          <CourseCard
-            title="Typescript"
-            imageUrl="https://sempreupdate.com.br/wp-content/uploads/2020/09/typescriptfeature.jpg"
-            categoryTitle="Programação"
-            userName="Hugo Mendonça"
-            courseRoute="#"
-          />
-          <CourseCard
-            title="Typescript"
-            imageUrl="https://sempreupdate.com.br/wp-content/uploads/2020/09/typescriptfeature.jpg"
-            categoryTitle="Programação"
-            userName="Hugo Mendonça"
-            courseRoute="#"
-          />
+          {courses.map(course => (
+            <CourseCard
+              title={course.name}
+              imageUrl={course.image_url}
+              categoryTitle={course.categories.title}
+              userName={course.user.name}
+              courseRoute={`/course/${course.id}`}
+            />
+          ))}
         </Cards>
       </Container>
     </>

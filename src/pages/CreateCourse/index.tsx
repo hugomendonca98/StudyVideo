@@ -34,7 +34,7 @@ export default function CreateCourse(): JSX.Element {
     async data => {
       try {
         await api.post('/course', data);
-        toast.success('Categoria Criada com Sucesso!', {
+        toast.success('Curso Criada com Sucesso!', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -46,7 +46,7 @@ export default function CreateCourse(): JSX.Element {
         });
         reset();
       } catch (error) {
-        toast.error('Erro ao criar a categoria.', {
+        toast.error('Erro ao criar curso.', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -124,7 +124,7 @@ export default function CreateCourse(): JSX.Element {
               })}
             />
             <CourseInput
-              placeholder="Titulo da categoria"
+              placeholder="Titulo da categoria existente"
               {...register('category_title', {
                 required: 'Titulo da categoria obrigatória.',
               })}
