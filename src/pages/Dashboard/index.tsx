@@ -4,6 +4,7 @@ import NavBar from '@/components/NavBar';
 import CustomButton from '@/components/CustomButton';
 import CourseCard from '@/components/CourseCard';
 import { useAuth } from '@/hooks/auth';
+import NoExistData from '@/components/NoExistData';
 import { Cards, Container } from './styles';
 
 export default function Dashboard(): JSX.Element {
@@ -19,6 +20,11 @@ export default function Dashboard(): JSX.Element {
         <CustomButton onClick={handleSignOut}>Sair</CustomButton>
       </NavBar>
       <Container>
+        <NoExistData
+          title="Nenhum curso cadastrado."
+          btnText="Criar Curso"
+          link="/"
+        />
         <Cards>
           <CourseCard
             title="Typescript"

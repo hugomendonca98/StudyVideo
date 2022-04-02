@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const Cards = styled.div`
   display: flex;
-  justify-content: justify;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 `;
