@@ -1,4 +1,6 @@
 import { ReactNode, ButtonHTMLAttributes } from 'react';
+import PropTypes from 'prop-types';
+
 import { Btn } from './styles';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -8,10 +10,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
 };
 
-export default function index({
+export default function CustomButton({
   background = '#6e2fbd',
   textcolor = '#fff',
-  border,
+  border = 'none',
   children,
   ...rest
 }: ButtonProps): JSX.Element {
@@ -26,3 +28,15 @@ export default function index({
     </Btn>
   );
 }
+
+CustomButton.prototypes = {
+  background: PropTypes.string,
+  textcolor: PropTypes.string,
+  border: PropTypes.string,
+};
+
+CustomButton.defaultProps = {
+  background: '#6e2fbd',
+  textcolor: '#fff',
+  border: 'none',
+};

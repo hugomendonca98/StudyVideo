@@ -66,7 +66,7 @@ export default function SignIn(): JSX.Element {
   return (
     <>
       <NavBar>
-        <LinkButton background="#fff" textColor="gray" linkTo="/">
+        <LinkButton background="#fff" textcolor="gray" linkTo="/">
           Voltar
         </LinkButton>
       </NavBar>

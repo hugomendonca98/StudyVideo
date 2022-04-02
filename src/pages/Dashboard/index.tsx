@@ -4,7 +4,8 @@ import NavBar from '@/components/NavBar';
 import CustomButton from '@/components/CustomButton';
 import CourseCard from '@/components/CourseCard';
 import { useAuth } from '@/hooks/auth';
-import NoExistData from '@/components/NoExistData';
+import DashboardSection from '@/components/DashboardSection';
+import CustomLink from '@/components/CustomLink';
 import { Cards, Container } from './styles';
 
 export default function Dashboard(): JSX.Element {
@@ -17,10 +18,51 @@ export default function Dashboard(): JSX.Element {
   return (
     <>
       <NavBar>
-        <CustomButton onClick={handleSignOut}>Sair</CustomButton>
+        <div>
+          <CustomLink
+            background="#fff"
+            textcolor="#2d2d2d"
+            linkTo="/painel"
+            padding="5px 10px"
+            active
+          >
+            Cursos
+          </CustomLink>
+          <CustomLink
+            background="#fff"
+            textcolor="#2d2d2d"
+            linkTo="/criar-curso"
+            padding="5px 10px"
+          >
+            Criar curso
+          </CustomLink>
+          <CustomLink
+            background="#fff"
+            textcolor="#2d2d2d"
+            linkTo="/categorias"
+            padding="5px 10px"
+          >
+            Categorias
+          </CustomLink>
+          <CustomLink
+            background="#fff"
+            textcolor="#2d2d2d"
+            linkTo="/criar-categoria"
+            padding="5px 10px"
+          >
+            Criar categoria
+          </CustomLink>
+          <CustomButton
+            background="#fff"
+            textcolor="#2d2d2d"
+            onClick={handleSignOut}
+          >
+            Sair
+          </CustomButton>
+        </div>
       </NavBar>
       <Container>
-        <NoExistData
+        <DashboardSection
           title="Nenhum curso cadastrado."
           btnText="Criar Curso"
           link="/"

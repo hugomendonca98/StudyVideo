@@ -2,7 +2,7 @@ import { darken } from 'polished';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const NoExistDataContainer = styled.div`
+export const DashboardSectionContainer = styled.div`
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -14,12 +14,12 @@ export const NoExistDataContainer = styled.div`
   padding: 10px;
 `;
 
-export const NoExistDataTitle = styled.h2`
+export const DashboardSectionTitle = styled.h2`
   color: #2d2d2d;
   margin-bottom: 10px;
 `;
 
-export const NoExistDataLink = styled(Link)`
+export const DashboardSectionLink = styled(Link)`
   text-decoration: none;
   background-color: #6e2fbd;
   color: #fff;

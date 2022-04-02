@@ -12,8 +12,10 @@ export const Btn = styled.button<LinkButtonProps>`
   border: none;
   background-color: ${props => props.background};
   color: ${props => props.textcolor};
+  font-size: 16px;
   ${props => props.border && `border: ${props.border}`};
   padding: 10px 20px;
+  margin: 10px;
   border-radius: 10px;
   transition: background 200ms;
   cursor: pointer;

@@ -24,7 +24,7 @@ export default function Home(): JSX.Element {
             <LinkButton
               linkTo="/signin"
               background="#fff"
-              textColor="#6e2fbd"
+              textcolor="#6e2fbd"
               border="1px solid #E0E0E0"
             >
               Entrar

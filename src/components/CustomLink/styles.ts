@@ -4,18 +4,23 @@ import styled from 'styled-components';
 
 interface LinkButtonProps {
   background: string;
-  textColor: string;
-  border?: string;
+  textcolor: string;
+  border: string;
+  padding: string;
+  active: boolean;
 }
 
 export const LinkBtn = styled(Link)<LinkButtonProps>`
   text-decoration: none;
   background-color: ${props => props.background};
-  color: ${props => props.textColor};
+  color: ${props => props.textcolor};
   ${props => props.border && `border: ${props.border}`};
-  padding: 10px 20px;
   border-radius: 10px;
   transition: background 200ms;
+  padding: ${props => props.padding};
+  margin: 5px;
+
+  background-color: ${props => props.active && darken(0.1, props.background)};
 
   &:hover {
     background-color: ${props =>

@@ -3,15 +3,17 @@ import { Switch } from 'react-router-dom';
 import Home from '@/pages/Home';
 import SignIn from '@/pages/SignIn';
 import Dashboard from '@/pages/Dashboard';
+import CreateCategory from '@/pages/CreateCategory';
 import Route from './routes';
 
 export default function Routes(): JSX.Element {
   return (
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/signin" component={SignIn} />
+      <Route path="/entrar" component={SignIn} />
 
-      <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route path="/painel" component={Dashboard} isPrivate />
+      <Route path="/criar-categoria" component={CreateCategory} isPrivate />
     </Switch>
   );
 }

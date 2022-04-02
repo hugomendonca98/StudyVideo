@@ -29,7 +29,7 @@ function Route({
         ) : (
           <Redirect
             to={{
-              pathname: isPrivate ? '/' : '/dashboard',
+              pathname: isPrivate ? '/' : '/painel',
               state: { from: location },
             }}
           />
