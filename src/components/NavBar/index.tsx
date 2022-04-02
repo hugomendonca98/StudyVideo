@@ -1,6 +1,6 @@
 import logo from '@/assets/logo.png';
 import { ReactNode } from 'react';
-import { Container, Menu, MenuLogo, Nav } from './styles';
+import { Container, Menu, MenuLogo, MenuLogoLink, Nav } from './styles';
 
 interface NavBarProps {
   children: ReactNode;
@@ -11,7 +11,9 @@ export default function index({ children }: NavBarProps): JSX.Element {
     <Nav>
       <Container>
         <Menu>
-          <MenuLogo src={logo} />
+          <MenuLogoLink to="/">
+            <MenuLogo src={logo} />
+          </MenuLogoLink>
           {children}
         </Menu>
       </Container>

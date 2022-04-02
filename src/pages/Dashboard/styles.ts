@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 1140px;
+  margin: auto;
+`;
 
-export const teste = styled.div``;
+export const Cards = styled.div`
+  display: flex;
+  justify-content: justify;
+  align-items: center;
+  flex-wrap: wrap;
+`;

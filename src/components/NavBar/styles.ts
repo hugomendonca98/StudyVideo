@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
@@ -15,6 +16,10 @@ export const Menu = styled.div`
 export const Container = styled.div`
   width: 1140px;
   margin: auto;
+`;
+
+export const MenuLogoLink = styled(Link)`
+  text-decoration: none;
 `;
 
 export const MenuLogo = styled.img`
