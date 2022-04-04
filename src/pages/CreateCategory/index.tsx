@@ -94,7 +94,7 @@ export default function CreateCategory(): JSX.Element {
             textcolor="#2d2d2d"
             linkTo="/criar-categoria"
             padding="5px 10px"
-            active
+            active="true"
           >
             Criar categoria
           </CustomLink>

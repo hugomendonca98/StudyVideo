@@ -7,7 +7,7 @@ interface LinkButtonProps {
   textcolor: string;
   border: string;
   padding: string;
-  active: boolean;
+  active: string;
 }
 
 export const LinkBtn = styled(Link)<LinkButtonProps>`
@@ -20,7 +20,8 @@ export const LinkBtn = styled(Link)<LinkButtonProps>`
   padding: ${props => props.padding};
   margin: 5px;
 
-  background-color: ${props => props.active && darken(0.1, props.background)};
+  background-color: ${props =>
+    props.active === 'true' && darken(0.1, props.background)};
 
   &:hover {
     background-color: ${props =>

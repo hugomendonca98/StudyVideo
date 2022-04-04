@@ -9,7 +9,7 @@ interface LinkButtonProps {
   textcolor?: string;
   border?: string;
   padding?: string;
-  active?: boolean;
+  active?: string | undefined;
   children: ReactNode;
 }
 
@@ -20,7 +20,7 @@ export default function CustomLink({
   border = 'none',
   padding = '10px 20px',
   children,
-  active = false,
+  active = 'false',
 }: LinkButtonProps): JSX.Element {
   return (
     <LinkBtn
@@ -41,7 +41,7 @@ CustomLink.prototypes = {
   textcolor: PropTypes.string,
   border: PropTypes.string,
   padding: PropTypes.string,
-  active: PropTypes.bool,
+  active: PropTypes.string,
 };
 
 CustomLink.defaultProps = {
@@ -49,5 +49,5 @@ CustomLink.defaultProps = {
   textcolor: '#fff',
   border: 'none',
   padding: '10px 20px',
-  active: false,
+  active: 'false',
 };

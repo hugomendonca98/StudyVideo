@@ -28,8 +28,8 @@ export default function CourseCard({
       <CardLink to={courseRoute}>
         <CardImage src={imageUrl} />
         <CardTitle>{title}</CardTitle>
-        <CardCategory>{categoryTitle}</CardCategory>
-        <CardUserName>{userName}</CardUserName>
+        <CardCategory>{`Categoria: ${categoryTitle}`}</CardCategory>
+        <CardUserName>{`Criado por: ${userName}`}</CardUserName>
       </CardLink>
     </CardContainer>
   );

@@ -30,11 +30,12 @@ export const CardTitle = styled.h2`
 `;
 
 export const CardCategory = styled.p`
-  color: #545454;
+  color: #737373;
   padding: 10px;
 `;
 
 export const CardUserName = styled.p`
-  color: #545454;
+  color: #737373;
   padding: 10px;
+  margin-bottom: 10px;
 `;

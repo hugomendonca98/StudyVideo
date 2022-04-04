@@ -1,13 +1,13 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import CustomButton from '@/components/CustomButton';
-import CustomLink from '@/components/CustomLink';
+import LinkButton from '@/components/CustomLink';
 import NavBar from '@/components/NavBar';
-import { useAuth } from '@/hooks/auth';
 
 import { useForm } from 'react-hook-form';
 import api from '@/services/api';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import {
   CourseForm,
   CourseFormContainer,
@@ -18,24 +18,60 @@ import {
   CourseLabel,
 } from './styles';
 
-export default function CreateCourse(): JSX.Element {
-  const { signOut } = useAuth();
+interface User {
+  id: string;
+  name: string;
+}
+
+interface Categories {
+  id: string;
+  title: string;
+}
+
+interface Course {
+  id: string;
+  name: string;
+  image_url: string;
+  categories: Categories;
+  user: User;
+}
+
+export default function EditCourse(): JSX.Element {
+  const [course, setCourse] = useState<Course>();
+
+  const { id } = useParams<{ id: string }>();
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: course?.name,
+      image_url: course?.image_url,
+      category_title: course?.categories.title,
+    },
+  });
 
-  const handleSignOut = useCallback(async () => {
-    signOut();
-  }, [signOut]);
+  useEffect(() => {
+    async function getCourse(): Promise<void> {
+      const response = await api.get(`/course/${id}`);
+      setCourse(response.data);
+      reset(response.data);
+    }
+    getCourse();
+  }, [id, reset]);
 
   const handleSendData = useCallback(
     async data => {
       try {
-        await api.post('/course', data);
-        toast.success('Curso Criada com Sucesso!', {
+        await api.put(`/course/${id}`, {
+          name: data.name,
+          image_url: data.image_url,
+          category_title: data.category_title,
+        });
+        toast.success('Curso Editado com Sucesso!', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -45,9 +81,8 @@ export default function CreateCourse(): JSX.Element {
           progress: undefined,
           theme: 'colored',
         });
-        reset();
       } catch (error) {
-        toast.error('Erro ao criar curso.', {
+        toast.error('Erro ao editar o curso.', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -59,58 +94,19 @@ export default function CreateCourse(): JSX.Element {
         });
       }
     },
-    [reset],
+    [id],
   );
 
   return (
     <>
       <NavBar>
-        <div>
-          <CustomLink
-            background="#fff"
-            textcolor="#2d2d2d"
-            linkTo="/painel"
-            padding="5px 10px"
-          >
-            Cursos
-          </CustomLink>
-          <CustomLink
-            background="#fff"
-            textcolor="#2d2d2d"
-            linkTo="/criar-curso"
-            padding="5px 10px"
-            active="true"
-          >
-            Criar curso
-          </CustomLink>
-          <CustomLink
-            background="#fff"
-            textcolor="#2d2d2d"
-            linkTo="/categorias"
-            padding="5px 10px"
-          >
-            Categorias
-          </CustomLink>
-          <CustomLink
-            background="#fff"
-            textcolor="#2d2d2d"
-            linkTo="/criar-categoria"
-            padding="5px 10px"
-          >
-            Criar categoria
-          </CustomLink>
-          <CustomButton
-            background="#fff"
-            textcolor="#2d2d2d"
-            onClick={handleSignOut}
-          >
-            Sair
-          </CustomButton>
-        </div>
+        <LinkButton background="#fff" textcolor="gray" linkTo={`/curso/${id}`}>
+          Voltar
+        </LinkButton>
       </NavBar>
       <Container>
         <CourseFormContainer>
-          <CourseFormTitle>Criar curso</CourseFormTitle>
+          <CourseFormTitle>Editar curso</CourseFormTitle>
           <CourseForm onSubmit={handleSubmit(handleSendData)}>
             <CourseLabel htmlFor="name">Nome do curso:</CourseLabel>
             <CourseInput
@@ -130,12 +126,13 @@ export default function CreateCourse(): JSX.Element {
               Titulo da categoria existente:
             </CourseLabel>
             <CourseInput
+              defaultValue={course?.categories.title}
               placeholder="Titulo da categoria existente"
               {...register('category_title', {
                 required: 'Titulo da categoria obrigatória.',
               })}
             />
-            <CustomButton type="submit">Criar</CustomButton>
+            <CustomButton type="submit">Editar</CustomButton>
             {errors.name?.message && (
               <FormError>{errors.name.message}</FormError>
             )}

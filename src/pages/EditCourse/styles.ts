@@ -24,6 +24,12 @@ export const CourseFormTitle = styled.h2``;
 
 export const CourseForm = styled.form``;
 
+export const CourseLabel = styled.label`
+  color: #2d2d2d;
+  margin-top: 20px;
+  display: block;
+`;
+
 export const CourseInput = styled.input`
   background-color: #ededed;
   margin: 10px;
@@ -31,12 +37,6 @@ export const CourseInput = styled.input`
   width: 300px;
   border: 1px solid #d4d4d4;
   outline: none;
-  display: block;
-`;
-
-export const CourseLabel = styled.label`
-  color: #2d2d2d;
-  margin-top: 20px;
   display: block;
 `;
 

@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks/auth';
 import DashboardSection from '@/components/DashboardSection';
 import CustomLink from '@/components/CustomLink';
 import api from '@/services/api';
+import { toast } from 'react-toastify';
 import { Cards, Container } from './styles';
 
 interface User {
@@ -34,8 +35,21 @@ export default function Dashboard(): JSX.Element {
 
   useEffect(() => {
     async function getCourses(): Promise<void> {
-      const response = await api.get('/course');
-      setCourse(response.data);
+      try {
+        const response = await api.get('/course');
+        setCourse(response.data);
+      } catch (error) {
+        toast.error('Erro ao carregar os cursos.', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+      }
     }
     getCourses();
   }, []);
@@ -53,7 +67,7 @@ export default function Dashboard(): JSX.Element {
             textcolor="#2d2d2d"
             linkTo="/painel"
             padding="5px 10px"
-            active
+            active="true"
           >
             Cursos
           </CustomLink>
@@ -91,23 +105,25 @@ export default function Dashboard(): JSX.Element {
         </div>
       </NavBar>
       <Container>
-        {courses.length < 1 && (
-          <DashboardSection
-            title="Nenhum curso cadastrado."
-            btnText="Criar Curso"
-            link="/"
-          />
-        )}
         <Cards>
-          {courses.map(course => (
-            <CourseCard
-              title={course.name}
-              imageUrl={course.image_url}
-              categoryTitle={course.categories.title}
-              userName={course.user.name}
-              courseRoute={`/course/${course.id}`}
+          {courses.length >= 1 ? (
+            courses.map(course => (
+              <CourseCard
+                title={course.name}
+                imageUrl={course.image_url}
+                categoryTitle={course.categories.title}
+                userName={course.user.name}
+                courseRoute={`/curso/${course.id}`}
+                key={course.id}
+              />
+            ))
+          ) : (
+            <DashboardSection
+              title="Nenhum curso cadastrado."
+              btnText="Criar Curso"
+              link="/"
             />
-          ))}
+          )}
         </Cards>
       </Container>
     </>
