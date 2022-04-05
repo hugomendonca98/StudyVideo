@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/auth';
 import { useForm } from 'react-hook-form';
 import api from '@/services/api';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import {
   CourseForm,
   CourseFormContainer,
@@ -18,8 +19,9 @@ import {
   CourseLabel,
 } from './styles';
 
-export default function CreateCourse(): JSX.Element {
+export default function CreateLesson(): JSX.Element {
   const { signOut } = useAuth();
+  const { id } = useParams<{ id: string }>();
   const {
     register,
     handleSubmit,
@@ -34,8 +36,11 @@ export default function CreateCourse(): JSX.Element {
   const handleSendData = useCallback(
     async data => {
       try {
-        await api.post(`/course`, data);
-        toast.success('Curso Criada com Sucesso!', {
+        await api.post(`/lesson/${id}`, {
+          title: data.title,
+          video_url: data.video_url,
+        });
+        toast.success('Aula Criada com Sucesso!', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -47,7 +52,7 @@ export default function CreateCourse(): JSX.Element {
         });
         reset();
       } catch (error) {
-        toast.error('Erro ao criar curso.', {
+        toast.error('Erro ao criar aula.', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -59,7 +64,7 @@ export default function CreateCourse(): JSX.Element {
         });
       }
     },
-    [reset],
+    [id, reset],
   );
 
   return (
@@ -110,40 +115,29 @@ export default function CreateCourse(): JSX.Element {
       </NavBar>
       <Container>
         <CourseFormContainer>
-          <CourseFormTitle>Criar curso</CourseFormTitle>
+          <CourseFormTitle>Criar aula</CourseFormTitle>
           <CourseForm onSubmit={handleSubmit(handleSendData)}>
-            <CourseLabel htmlFor="name">Nome do curso:</CourseLabel>
+            <CourseLabel htmlFor="name">Titulo da aula:</CourseLabel>
             <CourseInput
-              placeholder="Nome do curso"
-              {...register('name', {
-                required: 'Nome do curso obrigatório.',
+              placeholder="titulo da aula"
+              {...register('title', {
+                required: 'titulo da aula obrigatório.',
               })}
             />
-            <CourseLabel htmlFor="image_url">Url da imagem:</CourseLabel>
+            <CourseLabel htmlFor="video_url">Url do video:</CourseLabel>
             <CourseInput
-              placeholder="Url da imagem"
-              {...register('image_url', {
-                required: 'Url da imagem do curso obrigatória.',
+              placeholder="Url do video"
+              {...register('video_url', {
+                required: 'Url do video obrigatório.',
               })}
             />
-            <CourseLabel htmlFor="category_title">
-              Titulo da categoria existente:
-            </CourseLabel>
-            <CourseInput
-              placeholder="Titulo da categoria existente"
-              {...register('category_title', {
-                required: 'Titulo da categoria obrigatória.',
-              })}
-            />
+
             <CustomButton type="submit">Criar</CustomButton>
-            {errors.name?.message && (
-              <FormError>{errors.name.message}</FormError>
+            {errors.title?.message && (
+              <FormError>{errors.title.message}</FormError>
             )}
-            {errors.image_url?.message && (
-              <FormError>{errors.image_url.message}</FormError>
-            )}
-            {errors.category_title?.message && (
-              <FormError>{errors.category_title.message}</FormError>
+            {errors.video_url?.message && (
+              <FormError>{errors.video_url.message}</FormError>
             )}
           </CourseForm>
         </CourseFormContainer>

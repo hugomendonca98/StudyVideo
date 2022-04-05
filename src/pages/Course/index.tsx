@@ -1,11 +1,12 @@
 import NavBar from '@/components/NavBar';
 import LinkButton from '@/components/CustomLink';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import api from '@/services/api';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { FiEdit, FiTrash } from 'react-icons/fi';
 import { MdOutlinePlayLesson } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import {
   Container,
   CourseContainer,
@@ -19,6 +20,7 @@ import {
   Title,
   CourseMenuLinkText,
   CourseImage,
+  CourseDeleteButton,
 } from './styles';
 
 interface User {
@@ -50,6 +52,39 @@ export default function Course(): JSX.Element {
   const [course, setCourse] = useState<Courses>();
 
   const { id } = useParams<{ id: string }>();
+  const history = useHistory();
+
+  const handleDeleteCourse = useCallback(
+    async e => {
+      e.preventDefault();
+      try {
+        await api.delete(`/course/${id}`);
+        toast.success('Curso deletado com Sucesso!', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+        history.push('/');
+      } catch (error) {
+        toast.error('Erro ao deletar o curso.', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+      }
+    },
+    [history, id],
+  );
 
   useEffect(() => {
     async function getCourse(): Promise<void> {
@@ -75,15 +110,15 @@ export default function Course(): JSX.Element {
             </CourseTextContainer>
             <CourseImage src={course.image_url} />
             <CourseMenu>
-              <CourseMenuLink to={`/editar-curso/${id}`}>
+              <CourseMenuLink to={`/editar-curso/${course.id}`}>
                 <FiEdit />
                 <CourseMenuLinkText>Editar</CourseMenuLinkText>
               </CourseMenuLink>
-              <CourseMenuLink to="/">
-                <FiTrash />
+              <CourseDeleteButton onClick={handleDeleteCourse}>
+                <FiTrash color="#2d2d2d" />
                 <CourseMenuLinkText>Excluir</CourseMenuLinkText>
-              </CourseMenuLink>
-              <CourseMenuLink to="/">
+              </CourseDeleteButton>
+              <CourseMenuLink to={`/criar-aula/${course.id}`}>
                 <MdOutlinePlayLesson />
                 <CourseMenuLinkText>Criar aula</CourseMenuLinkText>
               </CourseMenuLink>
@@ -91,7 +126,11 @@ export default function Course(): JSX.Element {
             <CourseLessons>
               <Title>Aulas Disponiveis</Title>
               {course.lessons.map(lesson => (
-                <LessonCard to="/" key={lesson.id}>
+                <LessonCard
+                  to={{ pathname: lesson.video_url }}
+                  key={lesson.id}
+                  target="_blank"
+                >
                   <LessonTitle>{lesson.title}</LessonTitle>
                 </LessonCard>
               ))}

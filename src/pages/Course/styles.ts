@@ -87,3 +87,20 @@ export const CourseImage = styled.img`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 `;
+
+export const CourseDeleteButton = styled.button`
+  text-decoration: none;
+  border: none;
+  background-color: #fff;
+  color: #2d2d2d;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: background 200ms;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+`;

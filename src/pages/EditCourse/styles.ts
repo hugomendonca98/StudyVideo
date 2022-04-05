@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const CourseFormContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  width: 500px;
+  width: 100%;
   height: 450px;
   text-align: center;
   display: flex;
@@ -22,7 +22,9 @@ export const CourseFormContainer = styled.div`
 
 export const CourseFormTitle = styled.h2``;
 
-export const CourseForm = styled.form``;
+export const CourseForm = styled.form`
+  width: 90%;
+`;
 
 export const CourseLabel = styled.label`
   color: #2d2d2d;
@@ -33,9 +35,10 @@ export const CourseLabel = styled.label`
 export const CourseInput = styled.input`
   background-color: #ededed;
   margin: 10px;
-  padding: 10px 5px;
-  width: 300px;
+  padding: 15px 5px;
+  width: 100%;
   border: 1px solid #d4d4d4;
+  border-radius: 10px;
   outline: none;
   display: block;
 `;
